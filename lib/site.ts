@@ -11,7 +11,12 @@ export const siteConfig = {
     whatsapp: 'https://wa.me/33745562718',
   },
   social: {
-    instagram: 'https://www.instagram.com/aida.douja.hammami',
+    instagram: 'https://www.instagram.com/paris.aida.tours/',
+    facebook: 'https://www.facebook.com/parisaidatours/',
+    twitter: 'https://x.com/AidaHammami',
+    linkedin: 'https://www.linkedin.com/in/a%C3%AFda-douja-hammami/',
+    tiktok: 'https://www.tiktok.com/@parisaidatours',
+    google: 'https://share.google/V8CpxKpMXodDvD53m',
   },
   bokun: {
     channelUUID: 'ee56c558-0caf-4c80-9e1f-c65eafa073e2',

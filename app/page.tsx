@@ -1,12 +1,11 @@
-// HOMEPAGE
 import Link from 'next/link';
 import { siteConfig } from '@/lib/site';
-import { getFeaturedTours } from '@/lib/tours';
+import { tours } from '@/lib/tours';
 import TourCard from '@/components/TourCard';
 import { Star, Shield, Heart, MapPin } from 'lucide-react';
 
 export default function HomePage() {
-  const featured = getFeaturedTours();
+  const featured = tours.filter((t) => t.bookingType === 'bokun');
 
   return (
     <>

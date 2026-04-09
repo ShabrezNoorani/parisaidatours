@@ -12,7 +12,7 @@ export default function BookingWidget({ tour }: BookingWidgetProps) {
 
   // BOKUN booking
   if (tour.bookingType === 'bokun' && tour.bokunButtonId && tour.bokunExperienceId) {
-    const widgetUrl = `https://widgets.bokun.io/online-sales/${siteConfig.bokun.channelUUID}/experience/${tour.bokunExperienceId}?partialView=1`;
+    const widgetUrl = `https://widgets.bokun.io/online-sales/${siteConfig.bokun.channelUUID}/experience-calendar/${tour.bokunExperienceId}?partialView=1`;
 
     return (
       <>

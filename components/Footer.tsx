@@ -1,8 +1,25 @@
-import Link from 'next/link';
 import { siteConfig } from '@/lib/site';
-import { Mail, Phone, Instagram } from 'lucide-react';
+import Link from 'next/link';
+import { 
+  Mail, 
+  Phone, 
+  Instagram, 
+  Facebook, 
+  Twitter, 
+  Linkedin,
+  Globe
+} from 'lucide-react';
 
 export default function Footer() {
+  const socialLinks = [
+    { name: 'Instagram', icon: Instagram, href: siteConfig.social.instagram },
+    { name: 'Facebook', icon: Facebook, href: siteConfig.social.facebook },
+    { name: 'Twitter', icon: Twitter, href: siteConfig.social.twitter },
+    { name: 'LinkedIn', icon: Linkedin, href: siteConfig.social.linkedin },
+    { name: 'TikTok', icon: null, href: siteConfig.social.tiktok, label: 'TikTok' },
+    { name: 'Google Reviews', icon: Globe, href: siteConfig.social.google },
+  ];
+
   return (
     <footer className="bg-navy text-cream/70">
       <div className="max-w-7xl mx-auto section-padding">
@@ -31,19 +48,34 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* Contact */}
+          {/* Contact & Social */}
           <div>
             <h4 className="text-gold font-heading text-xl mb-4">Get in Touch</h4>
-            <div className="flex flex-col gap-3 text-sm">
+            <div className="flex flex-col gap-4 text-sm">
               <a href={`mailto:${siteConfig.contact.email}`} className="flex items-center gap-2 hover:text-gold transition-colors">
                 <Mail size={16} /> {siteConfig.contact.email}
               </a>
               <a href={siteConfig.contact.whatsapp} target="_blank" rel="noopener" className="flex items-center gap-2 hover:text-gold transition-colors">
                 <Phone size={16} /> {siteConfig.contact.phoneDisplay}
               </a>
-              <a href={siteConfig.social.instagram} target="_blank" rel="noopener" className="flex items-center gap-2 hover:text-gold transition-colors">
-                <Instagram size={16} /> Instagram
-              </a>
+              
+              <div className="pt-2">
+                <p className="text-gold text-xs uppercase tracking-widest font-semibold mb-3">Follow Us</p>
+                <div className="flex flex-wrap gap-4">
+                  {socialLinks.map((social) => (
+                    <a 
+                      key={social.name} 
+                      href={social.href} 
+                      target="_blank" 
+                      rel="noopener" 
+                      className="hover:text-gold transition-colors flex items-center gap-1"
+                      title={social.name}
+                    >
+                      {social.icon ? <social.icon size={18} /> : <span className="text-[10px] font-bold border border-current px-1 rounded-sm">{social.label}</span>}
+                    </a>
+                  ))}
+                </div>
+              </div>
             </div>
           </div>
         </div>
