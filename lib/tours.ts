@@ -24,8 +24,8 @@ export interface Tour {
   bokunExperienceId?: string;
   calendlyUrl?: string;
   featured: boolean;
-  category: string;
   badge?: string; // e.g. "Best Seller", "New", "20% Off"
+  hidePrice?: boolean;
 }
 
 // Helper to get a tour by slug
@@ -63,7 +63,7 @@ export const tours: Tour[] = [
     longDescription: 'Experience the breathtaking interior of Notre-Dame de Paris, reopened after years of meticulous restoration following the 2019 fire. Your state-licensed guide Aida will walk you through the nave, explain the stunning rose windows, the medieval craftsmanship, and share the dramatic story of the cathedral\'s rescue and rebirth. This tour is available in French and English.',
     duration: '1.5 hours',
     groupSize: 'Max 5 people — truly private',
-    price: 65,
+    price: 139,
     currency: '€',
     image: '/images/tours/notre-dame.jpg',
     highlights: [
@@ -91,7 +91,7 @@ export const tours: Tour[] = [
     longDescription: 'The Louvre is overwhelming — 35,000 works across 72,735 square metres. This express private tour cuts through the noise. Aida takes you straight to the masterpieces: the Mona Lisa, Winged Victory, Venus de Milo, and the Galerie d\'Apollon. You leave feeling like you truly experienced the Louvre.',
     duration: '2 hours',
     groupSize: 'Max 6 people',
-    price: 75,
+    price: 139,
     currency: '€',
     image: '/images/tours/louvre.jpg',
     highlights: [
@@ -116,7 +116,7 @@ export const tours: Tour[] = [
     longDescription: 'Montmartre is Paris at its most romantic and rebellious. Aida takes you beyond Sacré-Cœur into hidden lanes where Picasso, Modigliani, and Van Gogh once lived. Discover the last vineyard in Paris, secret staircases, and the story of how this hilltop became the birthplace of modern art.',
     duration: '2 hours',
     groupSize: 'Private — your family only',
-    price: 60,
+    price: 99,
     currency: '€',
     image: '/images/tours/montmartre.jpg',
     highlights: [
@@ -145,7 +145,8 @@ export const tours: Tour[] = [
     longDescription: 'The Île de la Cité is where Paris began over 2,000 years ago. On this private walking tour, Aida guides you through the island\'s layered history — from the Roman foundations to the medieval marvels of Sainte-Chapelle and the Conciergerie, to the flower market and hidden courtyards most visitors walk right past.',
     duration: '2 hours',
     groupSize: 'Up to 8 people',
-    price: 55,
+    price: 0,
+    hidePrice: true,
     currency: '€',
     image: '/images/tours/ile-de-la-cite.jpg',
     highlights: [
@@ -170,7 +171,8 @@ export const tours: Tour[] = [
     longDescription: 'Every visitor experiences Paris differently. This fully customisable walking tour lets you choose what matters to you — whether it\'s art, food, history, architecture, or hidden gems. Tell Aida your interests and she\'ll craft a route that feels personal, unhurried, and unforgettable.',
     duration: 'Flexible (2-4 hours)',
     groupSize: 'Up to 10 people',
-    price: 70,
+    price: 0,
+    hidePrice: true,
     currency: '€',
     image: '/images/tours/walking-paris.jpg',
     highlights: [
@@ -196,7 +198,8 @@ export const tours: Tour[] = [
     longDescription: 'Versailles is more than a palace — it\'s the story of absolute power, revolution, and breathtaking beauty. Aida takes you through the Hall of Mirrors, the King\'s and Queen\'s apartments, and out into the magnificent gardens. This is a full-day experience with transport coordination and a pace that lets you truly absorb the grandeur.',
     duration: 'Full day (5-6 hours)',
     groupSize: 'Up to 6 people',
-    price: 150,
+    price: 0,
+    hidePrice: true,
     currency: '€',
     image: '/images/tours/versailles.jpg',
     highlights: [
