@@ -90,43 +90,7 @@ export default async function TourPage({ params }: Props) {
               <MapPin size={16} className="text-gold" /> {tour.meetingPoint}
             </p>
 
-            {/* Mobile Calendly section — shown inline for consultation tours */}
-            {tour.bookingType === 'calendly' && (
-              <div className="lg:hidden mt-10 mb-8">
-                <div className="gold-line mb-6" />
-                <h3 className="font-heading text-2xl text-navy mb-2">Plan Your Tour</h3>
-                <p className="text-navy/60 text-sm mb-2">
-                  This experience is tailored entirely to you. Book a free 30-minute consultation with Aida — no payment needed.
-                </p>
-                {/* Urgency */}
-                <div className="bg-gold/10 border border-gold/20 rounded-sm px-4 py-3 mb-5">
-                  <p className="text-navy font-body text-sm font-semibold">
-                    🗓 Limited slots available in May 2026
-                  </p>
-                  <p className="text-navy/60 text-xs mt-1">
-                    Versailles and custom tours book out weeks in advance during spring season.
-                  </p>
-                </div>
-                {/* Calendly embed */}
-                <div
-                  className="calendly-inline-widget rounded-sm overflow-hidden border border-navy/10 shadow-sm"
-                  data-url={`${tour.calendlyUrl || 'https://calendly.com/admin-parisaidatours/30min'}?hide_event_type_details=1&hide_gdpr_banner=1&primary_color=C9A84C`}
-                  style={{ minWidth: '280px', height: '520px' }}
-                />
-                {/* WhatsApp alternative */}
-                <div className="mt-4 text-center">
-                  <p className="text-navy/50 text-xs mb-3">Prefer to message first?</p>
-                  <a
-                    href="https://wa.me/33745562718"
-                    target="_blank"
-                    rel="noopener"
-                    className="btn-whatsapp inline-flex items-center gap-2 text-sm"
-                  >
-                    WhatsApp Aida
-                  </a>
-                </div>
-              </div>
-            )}
+
           </div>
 
           {/* Booking Widget — 1/3 */}
