@@ -1,70 +1,47 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { Tour } from '@/lib/tours';
 import { siteConfig } from '@/lib/site';
 import { X, MessageCircle } from 'lucide-react';
 
-interface BookingWidgetProps {
+interface Props {
   tour: Tour;
 }
 
 // ─── BOKUN WIDGET ──────────────────────────────────────────────
 function BokunWidget({ tour }: { tour: Tour }) {
-  const [mobileOpen, setMobileOpen] = useState(false);
+  const [drawerOpen, setDrawerOpen] = useState(false);
+  const [mobileCalOpen, setMobileCalOpen] = useState(false);
   const mobileRef = useRef<HTMLDivElement>(null);
 
-  const widgetUrl = `https://widgets.bokun.io/online-sales/${siteConfig.bokun.channelUUID}/experience-calendar/${tour.bokunExperienceId}?partialView=1`;
+  const iframeSrc = `https://widgets.bokun.io/online-sales/${siteConfig.bokun.channelUUID}/experience-calendar/${tour.bokunExperienceId}?partialView=1`;
 
-  // Toggle body blur class when Bokun desktop drawer opens/closes
+  // Lock body scroll when drawer is open
   useEffect(() => {
-    const handleBokunOpen = () => {
-      document.body.classList.add('bokun-open');
-    };
-    const handleBokunClose = () => {
-      document.body.classList.remove('bokun-open');
-    };
-
-    // Bokun fires these custom events when the drawer opens/closes
-    window.addEventListener('bokun:open', handleBokunOpen);
-    window.addEventListener('bokun:close', handleBokunClose);
-
-    // Fallback: watch for Bokun iframe appearing in DOM
-    const observer = new MutationObserver(() => {
-      const bokunFrame = document.querySelector(
-        'iframe[src*="bokun"], .BokunWidget, [class*="bokun-overlay"]'
-      );
-      if (bokunFrame) {
-        document.body.classList.add('bokun-open');
-      } else {
-        document.body.classList.remove('bokun-open');
-      }
-    });
-    observer.observe(document.body, { childList: true, subtree: true });
-
-    return () => {
-      window.removeEventListener('bokun:open', handleBokunOpen);
-      window.removeEventListener('bokun:close', handleBokunClose);
-      observer.disconnect();
-      document.body.classList.remove('bokun-open');
-    };
-  }, []);
+    if (drawerOpen) {
+      document.body.classList.add('drawer-open');
+    } else {
+      document.body.classList.remove('drawer-open');
+    }
+    return () => document.body.classList.remove('drawer-open');
+  }, [drawerOpen]);
 
   // Scroll to mobile calendar when it opens
   useEffect(() => {
-    if (mobileOpen && mobileRef.current) {
+    if (mobileCalOpen && mobileRef.current) {
       setTimeout(() => {
         mobileRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
       }, 100);
     }
-  }, [mobileOpen]);
+  }, [mobileCalOpen]);
 
   return (
     <>
-      {/* ── DESKTOP: Sticky sidebar ─────────────────────────── */}
+      {/* ── DESKTOP: Sticky sidebar card ──────────────────── */}
       <div className="hidden lg:block sticky top-28">
         <div className="bg-white border border-navy/10 shadow-xl rounded-sm overflow-hidden">
-          {/* Price header */}
+          {/* Price */}
           <div className="bg-navy px-6 py-5 text-center">
             {tour.originalPrice && (
               <span className="text-cream/40 text-sm line-through mr-2">
@@ -78,7 +55,7 @@ function BokunWidget({ tour }: { tour: Tour }) {
           </div>
 
           {/* Details */}
-          <div className="px-6 py-5 border-b border-navy/5 space-y-2 text-sm text-navy/60">
+          <div className="px-6 py-4 border-b border-navy/5 space-y-2 text-sm text-navy/60">
             <div className="flex justify-between">
               <span>Duration</span>
               <span className="text-navy font-medium">{tour.duration}</span>
@@ -89,25 +66,18 @@ function BokunWidget({ tour }: { tour: Tour }) {
             </div>
           </div>
 
-          {/* Book Now button — Bokun triggers from this */}
+          {/* Book Now — opens our custom right drawer */}
           <div className="px-6 py-5">
             <button
-              className="bokunButton btn-primary w-full text-center block"
-              id={tour.bokunButtonId}
-              data-src={widgetUrl}
-              data-testid="widget-book-button"
+              onClick={() => setDrawerOpen(true)}
+              className="btn-primary w-full text-center block"
             >
               Book Now
             </button>
-            <p className="text-center text-navy/40 text-xs mt-3">
-              ✓ Free cancellation available
-            </p>
-            <p className="text-center text-navy/40 text-xs mt-1">
-              ✓ Instant confirmation
-            </p>
+            <p className="text-center text-navy/40 text-xs mt-3">✓ Free cancellation</p>
+            <p className="text-center text-navy/40 text-xs mt-1">✓ Instant confirmation</p>
           </div>
 
-          {/* WhatsApp fallback */}
           <div className="px-6 pb-5">
             <a
               href={siteConfig.contact.whatsapp}
@@ -122,7 +92,7 @@ function BokunWidget({ tour }: { tour: Tour }) {
         </div>
       </div>
 
-      {/* ── MOBILE: Fixed bottom bar ────────────────────────── */}
+      {/* ── MOBILE: Fixed bottom bar ───────────────────────── */}
       <div className="lg:hidden fixed bottom-0 left-0 right-0 z-50 bg-white border-t border-navy/10 shadow-2xl">
         <div className="flex items-center justify-between px-5 py-4">
           <div>
@@ -137,42 +107,69 @@ function BokunWidget({ tour }: { tour: Tour }) {
             <span className="text-navy/50 text-xs ml-1">/ person</span>
           </div>
           <button
-            onClick={() => setMobileOpen((v) => !v)}
+            onClick={() => setMobileCalOpen((v) => !v)}
             className="btn-primary text-sm px-6 py-3"
           >
-            {mobileOpen ? 'Close' : 'Book Now'}
+            {mobileCalOpen ? 'Close' : 'Book Now'}
           </button>
         </div>
       </div>
 
-      {/* ── MOBILE: Inline calendar panel (appears above "More Tours") ── */}
-      {mobileOpen && (
+      {/* ── MOBILE: Inline calendar above "More Tours" ─────── */}
+      {mobileCalOpen && (
         <div
           ref={mobileRef}
-          className="lg:hidden mb-6 bg-white border border-gold/20 rounded-sm overflow-hidden shadow-lg"
-          id="mobile-booking-panel"
+          className="lg:hidden mb-6 border border-gold/20 rounded-sm overflow-hidden shadow-lg bg-white"
         >
           <div className="bg-navy px-5 py-4 flex items-center justify-between">
             <span className="text-gold font-heading text-lg">Select a Date</span>
             <button
-              onClick={() => setMobileOpen(false)}
+              onClick={() => setMobileCalOpen(false)}
               className="text-cream/60 hover:text-cream transition-colors"
             >
               <X size={20} />
             </button>
           </div>
-          <div className="p-4">
-            <button
-              className="bokunButton btn-primary w-full text-center block"
-              id={`mobile_${tour.bokunButtonId}`}
-              data-src={widgetUrl}
-              data-testid="widget-book-button"
-            >
-              Select Date &amp; Book
-            </button>
-          </div>
+          <iframe
+            src={iframeSrc}
+            style={{ width: '100%', height: '520px', border: 'none' }}
+            title={`Book ${tour.shortTitle}`}
+          />
         </div>
       )}
+
+      {/* ── DESKTOP: Blur overlay (covers page behind drawer) ─ */}
+      <div
+        className={`booking-overlay ${drawerOpen ? 'open' : ''}`}
+        onClick={() => setDrawerOpen(false)}
+      />
+
+      {/* ── DESKTOP: Right-side drawer ─────────────────────── */}
+      <div className={`booking-drawer ${drawerOpen ? 'open' : ''}`}>
+        {/* Drawer header */}
+        <div className="booking-drawer-header">
+          <div>
+            <p className="text-gold font-heading text-xl">{tour.shortTitle}</p>
+            <p className="text-cream/50 text-xs mt-0.5">
+              {tour.currency}{tour.price} / person
+            </p>
+          </div>
+          <button
+            onClick={() => setDrawerOpen(false)}
+            className="text-cream/60 hover:text-cream transition-colors p-1"
+          >
+            <X size={24} />
+          </button>
+        </div>
+
+        {/* Bokun calendar inside iframe */}
+        <iframe
+          src={iframeSrc}
+          style={{ flex: 1, width: '100%', border: 'none' }}
+          title={`Book ${tour.shortTitle}`}
+          allow="payment"
+        />
+      </div>
     </>
   );
 }
@@ -183,7 +180,7 @@ function CalendlyWidget({ tour }: { tour: Tour }) {
 
   return (
     <>
-      {/* Desktop: sticky sidebar with embedded Calendly */}
+      {/* Desktop sticky sidebar */}
       <div className="hidden lg:block sticky top-28">
         <div className="bg-white border border-navy/10 shadow-xl rounded-sm overflow-hidden">
           <div className="bg-navy px-6 py-5 text-center">
@@ -192,9 +189,9 @@ function CalendlyWidget({ tour }: { tour: Tour }) {
             </span>
             <span className="text-cream/50 text-sm ml-1">/ person</span>
           </div>
-          <div className="px-4 py-4 border-b border-navy/5">
+          <div className="px-5 py-4 border-b border-navy/5">
             <p className="text-center text-navy/60 text-sm">
-              This tour is customised for you. Book a free 30-min consultation below.
+              Book a free 30-min consultation to plan your perfect tour.
             </p>
           </div>
           <div
@@ -205,7 +202,7 @@ function CalendlyWidget({ tour }: { tour: Tour }) {
         </div>
       </div>
 
-      {/* Mobile: fixed bottom bar → opens Calendly in new tab */}
+      {/* Mobile fixed bottom bar */}
       <div className="lg:hidden fixed bottom-0 left-0 right-0 z-50 bg-white border-t border-navy/10 shadow-2xl">
         <div className="flex items-center justify-between px-5 py-4">
           <div>
@@ -228,7 +225,7 @@ function CalendlyWidget({ tour }: { tour: Tour }) {
 }
 
 // ─── ENQUIRE WIDGET ────────────────────────────────────────────
-function EnquireWidget({ tour }: { tour: Tour }) {
+function EnquireWidget() {
   return (
     <div className="hidden lg:block sticky top-28">
       <div className="bg-white border border-navy/10 shadow-xl rounded-sm p-6 text-center">
@@ -255,8 +252,8 @@ function EnquireWidget({ tour }: { tour: Tour }) {
 }
 
 // ─── MAIN EXPORT ───────────────────────────────────────────────
-export default function BookingWidget({ tour }: BookingWidgetProps) {
+export default function BookingWidget({ tour }: Props) {
   if (tour.bookingType === 'bokun') return <BokunWidget tour={tour} />;
   if (tour.bookingType === 'calendly') return <CalendlyWidget tour={tour} />;
-  return <EnquireWidget tour={tour} />;
+  return <EnquireWidget />;
 }
