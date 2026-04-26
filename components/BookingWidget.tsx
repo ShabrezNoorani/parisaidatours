@@ -179,10 +179,33 @@ function CalendlyWidget({ tour }: { tour: Tour }) {
   const url = tour.calendlyUrl || siteConfig.calendly.baseUrl;
 
   useEffect(() => {
-    // Re-initialise Calendly after component mounts
-    if (typeof window !== 'undefined' && (window as any).Calendly) {
-      (window as any).Calendly.initInlineWidgets();
+    const initCalendly = () => {
+      if (typeof window !== 'undefined' && (window as any).Calendly?.initInlineWidgets) {
+        (window as any).Calendly.initInlineWidgets();
+      }
+    };
+
+    // If already loaded, init immediately
+    if ((window as any).Calendly?.initInlineWidgets) {
+      initCalendly();
+      return;
     }
+
+    // Otherwise wait for the script to load
+    const interval = setInterval(() => {
+      if ((window as any).Calendly?.initInlineWidgets) {
+        initCalendly();
+        clearInterval(interval);
+      }
+    }, 300);
+
+    // Stop trying after 10 seconds
+    const timeout = setTimeout(() => clearInterval(interval), 10000);
+
+    return () => {
+      clearInterval(interval);
+      clearTimeout(timeout);
+    };
   }, []);
 
   return (
