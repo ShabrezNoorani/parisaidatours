@@ -4,6 +4,7 @@ import { siteConfig } from '@/lib/site';
 import './globals.css';
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
+import CalendlyScript from '@/components/CalendlyScript';
 
 export const metadata: Metadata = {
   title: {
@@ -48,16 +49,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           strategy="lazyOnload"
         />
 
-        {/* Calendly — loads ONCE globally, lazy */}
-        <Script
-          src="https://assets.calendly.com/assets/external/widget.js"
-          strategy="afterInteractive"
-          onLoad={() => {
-            if (typeof window !== 'undefined' && (window as any).Calendly?.initInlineWidgets) {
-              (window as any).Calendly.initInlineWidgets();
-            }
-          }}
-        />
+        {/* Calendly — loads ONCE globally, interactive */}
+        <CalendlyScript />
       </body>
     </html>
   );
