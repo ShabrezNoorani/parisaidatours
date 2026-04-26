@@ -178,27 +178,54 @@ function BokunWidget({ tour }: { tour: Tour }) {
 function CalendlyWidget({ tour }: { tour: Tour }) {
   const url = tour.calendlyUrl || siteConfig.calendly.baseUrl;
 
+  useEffect(() => {
+    // Re-initialise Calendly after component mounts
+    if (typeof window !== 'undefined' && (window as any).Calendly) {
+      (window as any).Calendly.initInlineWidgets();
+    }
+  }, []);
+
   return (
     <>
       {/* Desktop sticky sidebar */}
       <div className="hidden lg:block sticky top-28">
         <div className="bg-white border border-navy/10 shadow-xl rounded-sm overflow-hidden">
+
+          {/* Header — no price shown */}
           <div className="bg-navy px-6 py-5 text-center">
-            <span className="text-gold font-heading text-4xl font-semibold">
-              {tour.currency}{tour.price}
-            </span>
-            <span className="text-cream/50 text-sm ml-1">/ person</span>
+            <p className="text-gold font-heading text-2xl">Plan Your Tour</p>
+            <p className="text-cream/50 text-sm mt-1">Free 30-min consultation</p>
           </div>
-          <div className="px-5 py-4 border-b border-navy/5">
-            <p className="text-center text-navy/60 text-sm">
-              Book a free 30-min consultation to plan your perfect tour.
+
+          {/* Urgency nudge */}
+          <div className="px-5 py-4 bg-gold/5 border-b border-gold/10 text-center">
+            <p className="text-navy font-body text-sm font-semibold">
+              🗓 Limited slots available in May
+            </p>
+            <p className="text-navy/60 text-xs mt-1">
+              Book your free consultation — no payment needed
             </p>
           </div>
+
+          {/* Calendly inline embed */}
           <div
             className="calendly-inline-widget"
-            data-url={url}
-            style={{ minWidth: '280px', height: '420px' }}
+            data-url={`${url}?hide_event_type_details=1&hide_gdpr_banner=1&primary_color=C9A84C`}
+            style={{ minWidth: '280px', height: '500px' }}
           />
+
+          {/* WhatsApp alternative */}
+          <div className="px-6 pb-5 border-t border-navy/5 pt-4">
+            <p className="text-center text-navy/50 text-xs mb-3">Prefer to chat first?</p>
+            <a
+              href={siteConfig.contact.whatsapp}
+              target="_blank"
+              rel="noopener"
+              className="btn-whatsapp w-full block text-center text-xs"
+            >
+              WhatsApp Aida
+            </a>
+          </div>
         </div>
       </div>
 
@@ -206,9 +233,8 @@ function CalendlyWidget({ tour }: { tour: Tour }) {
       <div className="lg:hidden fixed bottom-0 left-0 right-0 z-50 bg-white border-t border-navy/10 shadow-2xl">
         <div className="flex items-center justify-between px-5 py-4">
           <div>
-            <span className="text-navy font-heading text-2xl font-semibold">
-              From {tour.currency}{tour.price}
-            </span>
+            <p className="text-navy font-heading text-lg font-semibold">Plan Your Tour</p>
+            <p className="text-navy/50 text-xs">Free 30-min consultation</p>
           </div>
           <a
             href={url}

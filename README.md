@@ -9,3 +9,5 @@ Prompt 6 — Replaced Bokun popup with custom right-side drawer. Desktop: Book N
 **Prompt 8** — Fixed TypeScript build error: added missing category and hidePrice fields back to Tour interface.
 **Prompt 9** — Lightened navy color to #1B2E4F for a warmer, less harsh navy blue across hero and all navy backgrounds.
 **Prompt 10** — Added full blog system (lib/blog.ts brain, /blog listing page, /blog/[slug] detail page). 6 blog posts written with SEO metadata, each linked to its tour. Fixed blur overlay color to #1A2A44. Added Calendly inline embed on mobile tour pages. Added prose-article CSS for beautiful blog typography.
+**Prompt 11** — Fixed Calendly widget on consultation tour pages: removed €0 price display, added proper "Plan Your Tour" header, added urgency messaging (limited May slots), Calendly inline embed with gold accent color, WhatsApp fallback button. Fixed Calendly re-initialisation on mount.
+**Prompt 12** — Added Calendly inline booking widget to contact page with urgency nudge, navy header, and WhatsApp fallback.
