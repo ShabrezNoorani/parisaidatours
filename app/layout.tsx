@@ -51,7 +51,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         {/* Calendly — loads ONCE globally, lazy */}
         <Script
           src="https://assets.calendly.com/assets/external/widget.js"
-          strategy="lazyOnload"
+          strategy="afterInteractive"
+          onLoad={() => {
+            if (typeof window !== 'undefined' && (window as any).Calendly?.initInlineWidgets) {
+              (window as any).Calendly.initInlineWidgets();
+            }
+          }}
         />
       </body>
     </html>

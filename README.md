@@ -12,3 +12,4 @@ Prompt 6 — Replaced Bokun popup with custom right-side drawer. Desktop: Book N
 **Prompt 11** — Fixed Calendly widget on consultation tour pages: removed €0 price display, added proper "Plan Your Tour" header, added urgency messaging (limited May slots), Calendly inline embed with gold accent color, WhatsApp fallback button. Fixed Calendly re-initialisation on mount.
 **Prompt 12** — Added Calendly inline booking widget to contact page with urgency nudge, navy header, and WhatsApp fallback.
 **Prompt 13** — Fixed client-side crash on Calendly tour pages. Replaced initInlineWidgets call with a polling approach that waits for the Calendly script to fully load before initialising, with a 10-second timeout fallback.
+**Prompt 14** — Fixed Calendly widget not loading on first visit. Changed script strategy from lazyOnload to afterInteractive, and added onLoad callback to initialise inline widgets as soon as the script is ready.
