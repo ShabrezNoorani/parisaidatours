@@ -8,3 +8,4 @@ Prompt 6 — Replaced Bokun popup with custom right-side drawer. Desktop: Book N
 **Prompt 7** — Updated prices (Notre-Dame €139, Louvre €139, Montmartre €99). Calendly tours now hide price and show "Enquire for Price". Added Calendly URL to all 3 consultation tours. TourCard now shows "Book Now" CTA for Bokun tours and "Enquire & Book" (Calendly link) for consultation tours, plus WhatsApp nudge.
 **Prompt 8** — Fixed TypeScript build error: added missing category and hidePrice fields back to Tour interface.
 **Prompt 9** — Lightened navy color to #1B2E4F for a warmer, less harsh navy blue across hero and all navy backgrounds.
+**Prompt 10** — Added full blog system (lib/blog.ts brain, /blog listing page, /blog/[slug] detail page). 6 blog posts written with SEO metadata, each linked to its tour. Fixed blur overlay color to #1A2A44. Added Calendly inline embed on mobile tour pages. Added prose-article CSS for beautiful blog typography.

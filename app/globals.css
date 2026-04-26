@@ -43,7 +43,7 @@
   content: '';
   position: fixed;
   inset: 0;
-  background: rgba(10, 22, 40, 0.6);
+  background: rgba(26, 42, 68, 0.6);
   backdrop-filter: blur(4px);
   z-index: 40;
 }
@@ -58,7 +58,7 @@ body.bokun-open::before {
   content: '';
   position: fixed;
   inset: 0;
-  background: rgba(10, 22, 40, 0.55);
+  background: rgba(26, 42, 68, 0.55);
   backdrop-filter: blur(6px);
   -webkit-backdrop-filter: blur(6px);
   z-index: 998;
@@ -78,7 +78,7 @@ iframe[src*="bokun"] {
 .booking-overlay {
   position: fixed;
   inset: 0;
-  background: rgba(10, 22, 40, 0.6);
+  background: rgba(26, 42, 68, 0.6);
   backdrop-filter: blur(5px);
   -webkit-backdrop-filter: blur(5px);
   z-index: 998;
@@ -132,4 +132,40 @@ iframe[src*="bokun"] {
 /* Prevent body scroll when drawer open */
 body.drawer-open {
   overflow: hidden;
+}
+
+/* ── Blog article prose styles ──────────────────────────────── */
+.prose-article {
+  color: rgb(18 32 64 / 0.75);
+  font-family: 'Jost', sans-serif;
+  font-size: 1rem;
+  line-height: 1.85;
+  max-width: 68ch;
+}
+.prose-article h2 {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 1.75rem;
+  color: #122040;
+  margin-top: 2.5rem;
+  margin-bottom: 1rem;
+  font-weight: 500;
+}
+.prose-article h3 {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 1.35rem;
+  color: #122040;
+  margin-top: 2rem;
+  margin-bottom: 0.75rem;
+}
+.prose-article p {
+  margin-bottom: 1.4rem;
+}
+.prose-article strong {
+  color: #122040;
+  font-weight: 600;
+}
+.prose-article a {
+  color: #C9A84C;
+  text-decoration: underline;
+  text-underline-offset: 3px;
 }

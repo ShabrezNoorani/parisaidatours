@@ -89,6 +89,22 @@ export default async function TourPage({ params }: Props) {
             <p className="text-navy/70 text-sm flex items-center gap-2">
               <MapPin size={16} className="text-gold" /> {tour.meetingPoint}
             </p>
+
+            {/* Calendly inline embed — shown on mobile for calendly tours (desktop shows in sidebar) */}
+            {tour.bookingType === 'calendly' && (
+              <div className="lg:hidden mt-10">
+                <div className="gold-line mb-6" />
+                <h3 className="font-heading text-xl text-navy mb-2">Book a Consultation</h3>
+                <p className="text-navy/60 text-sm mb-4">
+                  This tour is customised for you. Select a time below for a free 30-minute consultation.
+                </p>
+                <div
+                  className="calendly-inline-widget rounded-sm overflow-hidden border border-navy/10"
+                  data-url={tour.calendlyUrl || 'https://calendly.com/admin-parisaidatours/30min'}
+                  style={{ minWidth: '280px', height: '520px' }}
+                />
+              </div>
+            )}
           </div>
 
           {/* Booking Widget */}
