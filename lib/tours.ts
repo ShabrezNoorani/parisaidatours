@@ -13,7 +13,8 @@ export interface Tour {
   duration: string;
   groupSize: string;
   price: number;
-  originalPrice?: number; // Set this to show a strikethrough sale price
+  originalPrice?: number;
+  hidePrice?: boolean;
   currency: string;
   image: string;
   highlights: string[];
@@ -24,8 +25,8 @@ export interface Tour {
   bokunExperienceId?: string;
   calendlyUrl?: string;
   featured: boolean;
-  badge?: string; // e.g. "Best Seller", "New", "20% Off"
-  hidePrice?: boolean;
+  category: string;
+  badge?: string;
 }
 
 // Helper to get a tour by slug
