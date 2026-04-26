@@ -8,7 +8,11 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        navy: { DEFAULT: '#0A1628', light: '#0F1F38', dark: '#060E1A' },
+        navy: {
+          DEFAULT: '#122040',
+          light: '#1a2d52',
+          dark: '#0A1628',
+        },
         gold: { DEFAULT: '#C9A84C', light: '#D4BA6A', dark: '#B8953A' },
         cream: '#FAF8F5',
         ivory: '#F5F0E8',

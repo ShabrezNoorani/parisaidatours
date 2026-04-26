@@ -7,18 +7,11 @@ import {
   Facebook, 
   Twitter, 
   Linkedin,
-  Globe
+  Star
 } from 'lucide-react';
 
 export default function Footer() {
-  const socialLinks = [
-    { name: 'Instagram', icon: Instagram, href: siteConfig.social.instagram },
-    { name: 'Facebook', icon: Facebook, href: siteConfig.social.facebook },
-    { name: 'Twitter', icon: Twitter, href: siteConfig.social.twitter },
-    { name: 'LinkedIn', icon: Linkedin, href: siteConfig.social.linkedin },
-    { name: 'TikTok', icon: null, href: siteConfig.social.tiktok, label: 'TikTok' },
-    { name: 'Google Reviews', icon: Globe, href: siteConfig.social.google },
-  ];
+
 
   return (
     <footer className="bg-navy text-cream/70">
@@ -61,19 +54,32 @@ export default function Footer() {
               
               <div className="pt-2">
                 <p className="text-gold text-xs uppercase tracking-widest font-semibold mb-3">Follow Us</p>
-                <div className="flex flex-wrap gap-4">
-                  {socialLinks.map((social) => (
-                    <a 
-                      key={social.name} 
-                      href={social.href} 
-                      target="_blank" 
-                      rel="noopener" 
-                      className="hover:text-gold transition-colors flex items-center gap-1"
-                      title={social.name}
-                    >
-                      {social.icon ? <social.icon size={18} /> : <span className="text-[10px] font-bold border border-current px-1 rounded-sm">{social.label}</span>}
-                    </a>
-                  ))}
+                <div className="flex flex-wrap gap-4 mt-4">
+                  <a href={siteConfig.social.instagram} target="_blank" rel="noopener"
+                    className="text-cream/50 hover:text-gold transition-colors text-xs flex items-center gap-1">
+                    <Instagram size={16} /> Instagram
+                  </a>
+                  <a href={siteConfig.social.facebook} target="_blank" rel="noopener"
+                    className="text-cream/50 hover:text-gold transition-colors text-xs flex items-center gap-1">
+                    <Facebook size={16} /> Facebook
+                  </a>
+                  <a href={siteConfig.social.twitter} target="_blank" rel="noopener"
+                    className="text-cream/50 hover:text-gold transition-colors text-xs flex items-center gap-1">
+                    <Twitter size={16} /> X / Twitter
+                  </a>
+                  <a href={siteConfig.social.linkedin} target="_blank" rel="noopener"
+                    className="text-cream/50 hover:text-gold transition-colors text-xs flex items-center gap-1">
+                    <Linkedin size={16} /> LinkedIn
+                  </a>
+                  <a href={siteConfig.social.tiktok} target="_blank" rel="noopener"
+                    className="text-cream/50 hover:text-gold transition-colors text-xs flex items-center gap-1">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.34 6.34 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.69a8.18 8.18 0 004.78 1.52V6.75a4.85 4.85 0 01-1.01-.06z"/></svg>
+                    TikTok
+                  </a>
+                  <a href={siteConfig.social.google} target="_blank" rel="noopener"
+                    className="text-cream/50 hover:text-gold transition-colors text-xs flex items-center gap-1">
+                    <Star size={16} /> Google Reviews
+                  </a>
                 </div>
               </div>
             </div>

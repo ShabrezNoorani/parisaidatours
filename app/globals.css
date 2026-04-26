@@ -47,3 +47,27 @@
   backdrop-filter: blur(4px);
   z-index: 40;
 }
+
+/* ── Bokun drawer — side panel from right ─────────────────── */
+/* When Bokun opens, it injects a fixed panel. We blur the rest of the page. */
+body.bokun-open {
+  overflow: hidden;
+}
+
+body.bokun-open::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: rgba(10, 22, 40, 0.55);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  z-index: 998;
+  pointer-events: auto;
+}
+
+/* Bokun injects its widget with class .BokunWidget — push it to right side */
+.BokunWidget,
+[class*="bokun-widget"],
+iframe[src*="bokun"] {
+  z-index: 999 !important;
+}
