@@ -7,3 +7,4 @@
 Prompt 6 — Replaced Bokun popup with custom right-side drawer. Desktop: Book Now opens a panel that slides in from the right with Bokun calendar inside an iframe, rest of page blurs behind it. Mobile: fixed bottom bar + inline iframe calendar above More Tours section.
 **Prompt 7** — Updated prices (Notre-Dame €139, Louvre €139, Montmartre €99). Calendly tours now hide price and show "Enquire for Price". Added Calendly URL to all 3 consultation tours. TourCard now shows "Book Now" CTA for Bokun tours and "Enquire & Book" (Calendly link) for consultation tours, plus WhatsApp nudge.
 **Prompt 8** — Fixed TypeScript build error: added missing category and hidePrice fields back to Tour interface.
+**Prompt 9** — Lightened navy color to #1B2E4F for a warmer, less harsh navy blue across hero and all navy backgrounds.
